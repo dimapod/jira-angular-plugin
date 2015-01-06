@@ -1,0 +1,49 @@
+$webResourceManager.requireResourcesForContext("bee-jira-plugin")
+<div ng-app="bee.jira.poc" class="aui-layout">
+  <div ng-controller="beeJiraCtrl">
+
+
+    <form class="aui">
+      <div class="field-group">
+        <label for="name">Welcome message: </label>
+        <input type="text" id="name" name="name" class="text" ng-model="beeWelcome">
+      </div>
+      <div class="field-group">
+        <button class="button" ng-click="hello()">Say hellow</button>
+      </div>
+    </form>
+
+    <p>Welcome message: <span>{{beeWelcome}}</span></p>
+  </div>
+</div>
+
+<div class="module">
+  <div class="mod-content">
+    <table class="aui">
+        #foreach( $entry in $people.entrySet() )
+            #if($entry.getValue().size() > 0)
+              <tr>
+                <td>$entry.getKey()
+                <td>
+                  <table>
+                      #foreach($user in $entry.getValue())
+                        <tr>
+                          <td>
+                            <img height="48px"
+                                 src="$avatarService.getAvatarAbsoluteURL($user,$user.getName(), $Avatar.Size.SMALL)"/>
+                          </td>
+                          <td style="padding: 3px;">
+                            <a href="${requestContext.baseUrl}/secure/ViewProfile.jspa?name=$user.getName()">$user.getDisplayName()</a>
+                            <br/>
+                            <a href="mailto:$user.getEmailAddress()">$user.getEmailAddress()
+                          </td>
+                        </tr>
+                      #end
+                  </table>
+                </td>
+              </tr>
+            #end
+        #end
+    </table>
+  </div>
+</div>
